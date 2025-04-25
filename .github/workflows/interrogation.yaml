@@ -1,4 +1,5 @@
 name: Shailyay Interrogation
+
 on:
   workflow_dispatch:
 
@@ -16,14 +17,12 @@ jobs:
       - name: Create interrogation file
         run: |
           mkdir -p shaily
-          cat <<EOF > shaily/interrogation-${{ env.date }}.md
-## Shailyay interrogation
-
-Create \`interrogation_${{ env.date }}.md\` on a branch linked to this PR and answer the following:
-
-1. What do you think I like about you?  
-2. What do you like about me?
-EOF
+          echo "## Shailyay interrogation" > shaily/interrogation-${{ env.date }}.md
+          echo "" >> shaily/interrogation-${{ env.date }}.md
+          echo "Create \`interrogation_${{ env.date }}.md\` on a branch linked to this PR and answer the following:" >> shaily/interrogation-${{ env.date }}.md
+          echo "" >> shaily/interrogation-${{ env.date }}.md
+          echo "1. What do you think I like about you?" >> shaily/interrogation-${{ env.date }}.md
+          echo "2. What do you like about me?" >> shaily/interrogation-${{ env.date }}.md
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
