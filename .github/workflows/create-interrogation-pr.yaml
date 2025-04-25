@@ -9,16 +9,15 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Get current date
-        id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> "$GITHUB_ENV"
 
       - name: Create E-Ball invite file
         run: |
-          echo "## My E-Ball Reflection" > eball-question-${{ env.date }}.md
-          echo "I'm hoping this gets merged 💙" >> eball-question-${{ env.date }}.md
+          mkdir -p invitations
+          echo "## My E-Ball Reflection" > invitations/eball-question-${{ env.date }}.md
+          echo "I'm hoping this gets merged 💙" >> invitations/eball-question-${{ env.date }}.md
 
       - name: Create Pull Request
-        id: cpr
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
