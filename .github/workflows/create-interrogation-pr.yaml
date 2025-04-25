@@ -10,10 +10,9 @@ jobs:
 
       - name: Get current date
         id: date
-        run: |
-          echo "date=$(date +'%Y-%m-%d')" >> "$GITHUB_ENV"
+        run: echo "date=$(date +'%Y-%m-%d')" >> "$GITHUB_ENV"
 
-      - name: Create file
+      - name: Create E-Ball invite file
         run: |
           echo "## My E-Ball Reflection" > eball-question-${{ env.date }}.md
           echo "I'm hoping this gets merged 💙" >> eball-question-${{ env.date }}.md
@@ -23,17 +22,16 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: E-Ball question
+          commit-message: "E-Ball big question invite"
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
           base: main
           branch: eball-invite-${{ env.date }}
-          title: 'E-Ball big question'
+          title: "E-Ball big question"
           body: |
             Would you be my date to E-Ball?
 
             - [ ] YES!!
             - [ ] ABSOLUTELY
             - [ ] DEFITNETLTY!!!
-          reviewers: AymanBX
