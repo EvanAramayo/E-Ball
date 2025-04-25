@@ -1,7 +1,6 @@
-name: Create Interrogation PR
-
+name: E-Ball Invite
 on:
-  workflow_dispatch:
+  workflow_dispatch
 
 jobs:
   createPullRequest:
@@ -14,30 +13,27 @@ jobs:
         run: |
           echo "date=$(date +'%Y-%m-%d')" >> "$GITHUB_ENV"
 
-      - name: Create questions file
+      - name: Create file
         run: |
-          mkdir -p interrogation
-          echo "## Shailyay Interrogation" > interrogation/questions-${{ env.date }}.md
-          echo "" >> interrogation/questions-${{ env.date }}.md
-          echo "1. What do you think I like about you?" >> interrogation/questions-${{ env.date }}.md
-          echo "2. What do you like about me?" >> interrogation/questions-${{ env.date }}.md
-          echo "3. Hypothetically, if your boyfriend asked you to a dance, what would you HAVE to do at the dance?" >> interrogation/questions-${{ env.date }}.md
+          echo "## My E-Ball Reflection" > eball-question-${{ env.date }}.md
+          echo "I'm hoping this gets merged 💙" >> eball-question-${{ env.date }}.md
 
       - name: Create Pull Request
+        id: cpr
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Create interrogation file with questions"
+          commit-message: E-Ball question
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
           base: main
-          branch: interrogation-${{ env.date }}
-          title: "Shailyay Interrogation - ${{ env.date }}"
+          branch: eball-invite-${{ env.date }}
+          title: 'E-Ball big question'
           body: |
-            Here are your questions to answer:
-            - [ ] What do you think I like about you?
-            - [ ] What do you like about me?
-            - [ ] Hypothetically, if your boyfriend asked you to a dance, what would you HAVE to do at the dance?
+            Would you be my date to E-Ball?
 
-            Go to **Files changed** and answer these questions! 💌
-          labels: 💌, question
+            - [ ] YES!!
+            - [ ] ABSOLUTELY
+            - [ ] DEFITNETLTY!!!
+          reviewers: AymanBX
